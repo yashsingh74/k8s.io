@@ -46,7 +46,6 @@ k8s-staging-examples
 k8s-staging-experimental
 k8s-staging-external-dns
 k8s-staging-gateway-api
-k8s-staging-gateway-api-conformance-images
 k8s-staging-git-sync
 k8s-staging-gmsa-webhook
 k8s-staging-infra-tools
