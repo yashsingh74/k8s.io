@@ -15,6 +15,7 @@ grafana:
         foldersFromFilesStructure: true
     datasources:
       enabled: true
+      isDefaultDatasource: false
   persistence:
     enabled: true
     storageClassName: hyperdisk-balanced
