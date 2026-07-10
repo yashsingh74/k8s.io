@@ -36,10 +36,9 @@ spec:
                   # pod order matters
                   - name: clonerefs
                   - (name): "initupload"
-                    # prow passes the json path directly, uncomment this once the feature is disabled in prow
-                    # env:
-                    #   - name: GOOGLE_APPLICATION_CREDENTIALS
-                    #     value: /etc/google/adc.json
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /etc/google/adc.json
                     volumeMounts: &volumeMounts
                       - mountPath: /var/run/secrets/google-iam-token/serviceaccount
                         name: google-iam-token
@@ -50,10 +49,9 @@ spec:
                 containers: &containers
                   - name: test
                   - (name): sidecar
-                    # prow passes the json path directly, uncomment this once the feature is disabled in prow
-                    # env:
-                    #   - name: GOOGLE_APPLICATION_CREDENTIALS
-                    #     value: /etc/google/adc.json
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /etc/google/adc.json
                     volumeMounts:
                       - mountPath: /var/run/secrets/google-iam-token/serviceaccount
                         name: google-iam-token
@@ -89,3 +87,23 @@ spec:
                     volumeMounts: *volumeMounts
                 containers: *containers
                 volumes: *volumes
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: google-adc
+data:
+  adc.json: |
+    {
+      "universe_domain": "googleapis.com",
+      "type": "external_account",
+      "audience": "//iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/ibm-clusters/providers/s390x",
+      "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
+      "token_url": "https://sts.googleapis.com/v1/token",
+      "credential_source": {
+        "file": "/var/run/secrets/google-iam-token/serviceaccount/token",
+        "format": {
+          "type": "text"
+        }
+      }
+    }
