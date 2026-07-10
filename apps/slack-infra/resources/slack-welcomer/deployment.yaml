@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: slack-welcomer
-        image: registry.k8s.io/slack-infra/slack-welcomer:v20230228-2b433f6
+        image: registry.k8s.io/slack-infra/slack-welcomer:v20260709-3c87798
         args:
           - --config-path=/etc/slack-welcomer/config.json
           - --message-path=/etc/welcome-message/welcome.md
